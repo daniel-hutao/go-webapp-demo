@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: go-webapp-demo
+  labels:
+    app: go-webapp-demo
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: go-webapp-demo
+  template:
+    metadata:
+      labels:
+        app: go-webapp-demo
+    spec:
+      containers:
+      - name: go-webapp-demo
+        image: "daniel-hutao/go-webapp-demo:{{ .Chart.AppVersion }}"
+        ports:
+        - containerPort: 8080
